@@ -1,10 +1,14 @@
 import wollok.game.*
-import pepita.*
+import pieces.*
 import texto.*
+import level.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.addVisual(texto)
+	game.title("Tetris")
+	game.cellSize(40)
+	game.height(10)
+	game.width(6)
+	game.boardGround(background.image())
+	level.keysConfig()
 	game.start()
 }
