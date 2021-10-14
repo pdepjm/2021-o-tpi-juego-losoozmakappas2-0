@@ -1,14 +1,19 @@
 import wollok.game.*
-import pieces.*
 import texto.*
-import level.*
+import pokemon.*
+import piedras.*
+
+const pokemon = new Pokemon(ptosDeVida = 10, danio = 10, position = game.center())
 
 program juego {
-	game.title("Tetris")
-	game.cellSize(40)
-	game.height(10)
-	game.width(6)
-	game.boardGround(background.image())
-	level.keysConfig()
+	game.title("Pokemon")
+	game.width(20)
+	game.height(20)
+	game.addVisualCharacter(pokemon)
+	game.addVisual(agua)
+	game.addVisual(fuego)
+	game.onCollideDo(pokemon, {
+		piedra => pokemon.tocarPiedra(piedra)
+	})
 	game.start()
 }
