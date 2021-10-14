@@ -2,9 +2,11 @@
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Gonzalo Casanova
+- Alan Fried
+- Melina Loza Flores
+- Jose Luis Serrudo
+- Sofia Magdalena Cupolo
 
 ## Capturas
 
