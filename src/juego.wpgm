@@ -1,19 +1,27 @@
 import wollok.game.*
-import texto.*
 import pokemon.*
 import piedras.*
+import fondos.*
+import direcciones.*
 
-const pokemon = new Pokemon(ptosDeVida = 10, danio = 10, position = game.center())
+const jugador = new Pokemon(vida = 10, danio = 10, position = game.at(7,0), image = "pokemons/pikachu.png")
 
 program juego {
-	game.title("Pokemon")
-	game.width(20)
-	game.height(20)
-	game.addVisualCharacter(pokemon)
-	game.addVisual(agua)
-	game.addVisual(fuego)
-	game.onCollideDo(pokemon, {
-		piedra => pokemon.tocarPiedra(piedra)
-	})
-	game.start()
+    game.title("Pokemon")
+    game.width(15)
+    game.height(10)
+    // todo: dividir en subtareas, pasar el fondo dinamicamente
+    keyboard.left().onPressDo({ jugador.position(izquierda.proximaPos(jugador.position(),pasto))})
+    keyboard.right().onPressDo({ jugador.position(derecha.proximaPos(jugador.position(),pasto))})
+    keyboard.up().onPressDo({ jugador.position(arriba.proximaPos(jugador.position(),pasto))})
+    keyboard.down().onPressDo({ jugador.position(abajo.proximaPos(jugador.position(),pasto))})
+    game.addVisual(jugador)
+    game.addVisual(hoja)
+    game.boardGround(pasto.image())
+    game.onCollideDo(jugador, {
+        piedra => jugador.evolucionar(piedra)
+        // solo para verificar que cambio el elemento
+        game.say(jugador, "Mi elemento es " + piedra.elemento())
+    })
+    game.start()
 }
