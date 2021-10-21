@@ -1,34 +1,32 @@
 import wollok.game.*
 import piedras.*
 
+// todo: cambiar imagenes, agregar pokemones estaticos
+
 class Pokemon {
-	var property ptosDeVida
-	var property danio
+    var property vida
+    var property danio
+
+    var elemento = ""
+    var property position = game.center()
+    var property image = ""
 	
-	var elemento = ""
-	var property position = game.center()
-	method image() = "sprite_MainChara_Regimys_All.png"
-	
-	method setPosition(newPosition) {
-		position = newPosition
-	}
-	
-	method cambiarElemento(nuevoElemento) {
-		elemento = nuevoElemento
-	}
-	
-	method cambiarPtosDeVida(puntos) {
-		ptosDeVida += puntos
-	} 
-	
-	method cambiarDanio(nuevoDanio) {
-		danio += nuevoDanio
-	}
-	
-	method tocarPiedra(piedra) {
-		self.cambiarElemento(piedra.elemento())
-		self.cambiarPtosDeVida(piedra.vida())
-		self.cambiarDanio(piedra.danio())
-	}
-	
+    method setElemento(nuevoElemento) {
+        elemento = nuevoElemento
+    }
+
+    method setVida(nuevosPuntos) {
+        vida += nuevosPuntos
+    } 
+
+    method setDanio(nuevoDanio) {
+        danio += nuevoDanio
+    }
+
+    method evolucionar(piedra) {
+        self.setElemento(piedra.elemento())
+        self.setVida(piedra.vida())
+        self.setDanio(piedra.danio())
+    }
+
 }
