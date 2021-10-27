@@ -11,8 +11,8 @@ class Nivel {
 	//const property anterior = new Nivel()
 }
 
-const nivelBosque = new Nivel(fondo = fondoBosque, pokemon = prueba, piedra = piedraHoja, siguiente = nivelElectrico)
-const nivelElectrico = new Nivel(fondo = fondoTrueno, pokemon = prueba, piedra = piedraTrueno, siguiente = nivelBosque)
+const nivelBosque = new Nivel(fondo = fondoBosque, piedra = piedraHoja, siguiente = nivelElectrico)
+const nivelElectrico = new Nivel(fondo = fondoTrueno, piedra = piedraTrueno, siguiente = nivelBosque)
 
 object actual {
 	var property nivel = nivelElectrico // nivel inicial
