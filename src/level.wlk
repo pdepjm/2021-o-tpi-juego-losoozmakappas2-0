@@ -1,4 +1,0 @@
-import direcciones.*
-object configurarTeclas {
-	
-}
