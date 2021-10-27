@@ -1,32 +1,27 @@
 import wollok.game.*
 import piedras.*
 
-// todo: cambiar imagenes, agregar pokemones estaticos
+// orden piedras: trueno -> agua -> fuego -> hielo -> hoja -> lunar -> dia -> noche
+// orden elementos: electrico -> agua -> fuego -> hielo -> planta -> veneno -> hada -> siniestro
 
 class Pokemon {
-    var property vida
-    var property danio
+    var property vida = 0
+    var property danio = 0
 
-    var elemento = ""
+    var property elemento = ""
     var property position = game.center()
     var property image = ""
-	
-    method setElemento(nuevoElemento) {
-        elemento = nuevoElemento
-    }
-
-    method setVida(nuevosPuntos) {
-        vida += nuevosPuntos
-    } 
-
-    method setDanio(nuevoDanio) {
-        danio += nuevoDanio
-    }
 
     method evolucionar(piedra) {
-        self.setElemento(piedra.elemento())
-        self.setVida(piedra.vida())
-        self.setDanio(piedra.danio())
+        self.elemento(piedra.elemento())
+        self.vida(piedra.vida())
+        self.danio(piedra.danio())
+    }
+    
+    method luchar(rival) {
+    	
     }
 
 }
+
+const jugador = new Pokemon(vida = 10, danio = 10, elemento = "electrico", position = game.at(7,0), image = "pokemons/pikachu.png")
