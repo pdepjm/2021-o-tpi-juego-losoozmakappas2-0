@@ -1,8 +1,4 @@
 import wollok.game.*
-import pokemon.*
-import piedras.*
-import fondos.*
-import direcciones.*
 import configuraciones.*
 import niveles.*
 
@@ -10,6 +6,7 @@ program juego {
     game.title("Pokemon")
     game.width(15)
     game.height(10)
+    nivel.configurarElementos()
     nivel.cargarNivel(actual.nivel())
     nivel.configurarTeclas()
     
