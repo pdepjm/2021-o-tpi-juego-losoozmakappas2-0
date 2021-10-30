@@ -1,8 +1,10 @@
-import fondos.*
+import niveles.*
 
 object izquierda {
-	method proximaPos(actualPos, fondo) {
-		if(actualPos.x() == fondo.limiteIzq()){
+	method proximaPos(actualPos) {
+		if(actualPos.x() == actual.nivel().fondo().limiteIzq() or 
+		  (actualPos.x() == actual.nivel().pokemon().limiteDerecha() and 
+		  actualPos.y() == actual.nivel().pokemon().position().y())) {
 			return actualPos
 		} else {
 			return actualPos.left(1)
@@ -11,8 +13,10 @@ object izquierda {
 }
 
 object derecha {
-	method proximaPos(actualPos, fondo) {
-		if(actualPos.x() == fondo.limiteDerecha()){
+	method proximaPos(actualPos) {
+		if(actualPos.x() == actual.nivel().fondo().limiteDerecha() or 
+		  (actualPos.x() == actual.nivel().pokemon().limiteIzq() and 
+		  actualPos.y() == actual.nivel().pokemon().position().y())) {
 			return actualPos
 		} else {
 			return actualPos.right(1)
@@ -21,8 +25,10 @@ object derecha {
 }
 
 object arriba {
-	method proximaPos(actualPos, fondo) {
-		if(actualPos.y() == fondo.limiteArriba()){
+	method proximaPos(actualPos) {
+		if(actualPos.y() == actual.nivel().fondo().limiteArriba() or 
+		  (actualPos.y() == actual.nivel().pokemon().limiteAbajo() and 
+		  actualPos.x() == actual.nivel().pokemon().position().x())) {
 			return actualPos
 		} else {
 			return actualPos.up(1)
@@ -31,8 +37,10 @@ object arriba {
 }
 
 object abajo {
-	method proximaPos(actualPos, fondo) {
-		if(actualPos.y() == fondo.limiteAbajo()){
+	method proximaPos(actualPos) {
+		if(actualPos.y() == actual.nivel().fondo().limiteAbajo() or 
+		  (actualPos.y() == actual.nivel().pokemon().limiteArriba() and 
+		  actualPos.x() == actual.nivel().pokemon().position().x())) {
 			return actualPos
 		} else {
 			return actualPos.down(1)

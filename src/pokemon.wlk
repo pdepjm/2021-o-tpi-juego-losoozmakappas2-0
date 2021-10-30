@@ -11,6 +11,10 @@ class Pokemon {
     var property danio = 0
     var property position = game.center()
     var property image = ""
+    var property limiteIzq = self.position().left(1).x()
+    var property limiteDerecha = self.position().right(1).x()
+    var property limiteAbajo = self.position().down(1).y()
+    var property limiteArriba = self.position().up(1).y()
     
     method elemento() = elemento
 
@@ -48,18 +52,12 @@ class Pokemon {
     	vida -= danioRecibido
     }
     
-    // cambiar
-    method estaAlLado(pokemon) {
-    	return self.derecha(pokemon) or 
-    		   self.izquierda(pokemon) or
-    		   self.arriba(pokemon) or
-    		   self.abajo(pokemon)
+    method estaAlLadoDe(pokemon) {
+    	return (pokemon.limiteDerecha() == self.position().x() and self.position().y() == pokemon.position().y()) or 
+    		   (pokemon.limiteIzq() == self.position().x() and self.position().y() == pokemon.position().y()) or
+    		   (pokemon.limiteArriba() == self.position().y() and self.position().x() == pokemon.position().x()) or
+    		   (pokemon.limiteAbajo() == self.position().y() and self.position().x() == pokemon.position().x())
     }
-    
-	method derecha(pokemon) = self.position() == pokemon.position().right(1)
-	method izquierda(pokemon) = self.position() == pokemon.position().left(1)
-	method arriba(pokemon) = self.position() == pokemon.position().up(1)
-	method abajo(pokemon) = self.position() == pokemon.position().down(1)
 
 }
 
