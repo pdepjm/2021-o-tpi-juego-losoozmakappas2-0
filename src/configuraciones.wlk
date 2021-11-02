@@ -5,6 +5,9 @@ import pokemon.*
 import elementos.*
 import piedras.*
 
+//agregado
+import fondos.*
+
 object nivel {
 	
 	method configurarLimites() {
@@ -28,10 +31,18 @@ object nivel {
 	method cargarNivel(nivel) {
 		//self.configurarFondo(nivel.fondo())
 		self.configurarLimites()
-		game.boardGround(nivel.fondo().image())
+		//game.boardGround(nivel.fondo().image())
+		game.addVisual(nivel.fondo())
 		game.addVisual(jugador)
-		game.addVisual(nivel.pokemon())
+		//self.ubicarAleatoriamente(nivel.pokemon())
+		//game.addVisual(nivel.pokemon())
+			nivel.pokemonesRivales().forEach { rival =>  
+			game.addVisual(rival)
+			self.ubicarAleatoriamente(rival) 
+		}
+		
     	
+    	/* 
     	game.onCollideDo(jugador, {
         	piedra => if(piedra.equals(actual.nivel().piedra())) {
         		jugador.evolucionar(piedra.elemento())
@@ -42,6 +53,9 @@ object nivel {
         	//self.cargarNivel(actual.nivel().siguiente())
         	//actual.actualizar()
     	})
+    	
+    	*/
+    	game.onCollideDo(jugador, {elementoDelTablero => elementoDelTablero.colisionadoPor(jugador) estadoFinal.actualizarEstadoDelJugador()})
 	}
 	
 	method configurarTeclas() {
@@ -49,7 +63,7 @@ object nivel {
 		keyboard.s().onPressDo({
 			game.say(jugador, "Vida: " + jugador.vida().toString() + 
 			"\n Daño: " + jugador.danio().toString() +  
-			"\n Elemento: " + jugador.elemento().nombre())
+			"\n Elemento: " + jugador.elemento().nombre() + jugador.piedrasObtenidas().size().toString())
 		})
 		
 		keyboard.l().onPressDo({
@@ -70,4 +84,53 @@ object nivel {
 		})
 	}
 	
+	//agregado
+	method ubicarAleatoriamente(elementoDelTablero){
+		var posicion = new Position (x=1.randomUpTo(14),y=1.randomUpTo(6))
+		if(game.getObjectsIn(posicion).isEmpty())
+			elementoDelTablero.position(posicion)
+		else
+			self.ubicarAleatoriamente(elementoDelTablero)			
+		
+	}
+	
+	method pasarALaSiguienteBatalla(nuevoNivel){
+		game.schedule (2000, {=>game.clear() self.configurarTeclas() self.cargarNivel(nuevoNivel)})
+	}
+	
+	method ganaste(){
+		game.clear()
+		game.title("Pokemon")
+		game.width(15)
+		game.height(10)
+		//game.boardGround(fondoGanador.image())
+		game.addVisual(fondoGanador)
+
+		//keyboard.p().onPressDo{self.inicio()}
+		//keyboard.f().onPressDo{game.stop()}
+	}
+		
+	method perdiste(){
+		game.clear()
+		game.title("Pokemon")
+		game.width(15)
+		game.height(10)
+        game.addVisual(fondoGameOver)
+        actual.nivel(nivelBosque) // volver alnivel inicial
+		keyboard.p().onPressDo{self.configurarTeclas() self.cargarNivel(actual.nivel())}
+		keyboard.f().onPressDo{game.stop()}
+		
+	}
+}
+
+//agregado
+object estadoFinal{
+	
+	method actualizarEstadoDelJugador(){
+		if (jugador.piedrasObtenidas().size()==5){
+			nivel.ganaste()
+		} else if(jugador.vida()==0){
+			nivel.perdiste()
+		}
+	}
 }

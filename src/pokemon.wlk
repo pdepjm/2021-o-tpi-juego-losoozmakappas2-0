@@ -2,6 +2,10 @@ import wollok.game.*
 import elementos.*
 import piedras.*
 
+//agregado
+import niveles.*
+import configuraciones.*
+
 // orden piedras: trueno -> agua -> fuego -> hielo -> hoja -> lunar -> dia -> noche
 // orden elementos: electrico -> agua -> fuego -> hielo -> planta -> veneno -> hada -> siniestro
 
@@ -15,6 +19,17 @@ class Pokemon {
     var property limiteDerecha = self.position().right(1).x()
     var property limiteAbajo = self.position().down(1).y()
     var property limiteArriba = self.position().up(1).y()
+    
+    //agregado
+    const piedrasObtenidas=#{}
+    
+    method piedrasObtenidas(piedra){
+    	piedrasObtenidas.add(piedra)
+    }
+    
+    method piedrasObtenidas() = piedrasObtenidas
+    
+    //
     
     method elemento() = elemento
 
@@ -45,11 +60,11 @@ class Pokemon {
     		self.recibirDanio(rival.danio())
     	}
     	
-    	if(self.vida() < rival.vida()) return self else return rival
+    	//if(self.vida() < rival.vida()) return self else return rival
     }
     
     method recibirDanio(danioRecibido) {
-    	vida -= danioRecibido
+    	vida = 0.max(vida - danioRecibido)
     }
     
     method estaAlLadoDe(pokemon) {
@@ -58,9 +73,72 @@ class Pokemon {
     		   (pokemon.limiteArriba() == self.position().y() and self.position().x() == pokemon.position().x()) or
     		   (pokemon.limiteAbajo() == self.position().y() and self.position().x() == pokemon.position().x())
     }
+    
+    //agregado
+    /* 
+    method colisionadoPor(jugador){
+    	//const perdedor = jugador.luchar(actual.nivel().pokemon())
+    	const perdedor = jugador.luchar(self)
+			if(perdedor == jugador) {
+					// agregar dialogo de perdida
+				game.stop()
+			} else {
+				game.removeVisual(perdedor)
+				game.say(jugador, "¡LE GANE!")
+				//perdedor.position(game.at(-1,-1)) // lo muevo para poder agarrar la piedra
+				//game.addVisual(actual.nivel().piedra())
+				nivel.ubicarAleatoriamente(actual.nivel().piedra())
+				game.addVisual(actual.nivel().piedra())
+			}
+    }
+    */
+    method colisionadoPor(jugador){
+    	//const perdedor = jugador.luchar(actual.nivel().pokemon())
+    	//const perdedor = jugador.luchar(self)
+    	//Self en este caso es el rival del jugador
+			jugador.luchar(self)
+				if(jugador.vida()<self.vida()) {
+					// agregar dialogo de perdida
+					game.removeVisual(self)
+					game.say(jugador, "¡Rayos perdi la batalla y no obtuve una piedra!")	
+					actual.actualizar() 
+					nivel.pasarALaSiguienteBatalla(actual.nivel())
+					//game.stop()
+				} else {
+					game.removeVisual(self)
+					game.say(jugador, "¡LE GANE!")
+					//perdedor.position(game.at(-1,-1)) // lo muevo para poder agarrar la piedra
+					//game.addVisual(actual.nivel().piedra())
+					nivel.ubicarAleatoriamente(actual.nivel().piedra())
+					game.addVisual(actual.nivel().piedra())
+				}
+				
+			
+    }
 
 }
 
-const jugador = new Pokemon(vida = 40, danio = 15, position = game.at(7,0), image = "pokemons/pikachu_izquierda.png")
+const jugador = new Pokemon(elemento = elemElectrico,vida = 40, danio = 15, position = game.at(7,0), image = "pokemons/pikachu_izquierda.png")
 
-const prueba = new Pokemon(elemento = elemElectrico, vida = 1, danio = 1, position = game.at(7,6), image = "pokemons/pikachu_derecha.png")
+const otroPikachu = new Pokemon(elemento = elemElectrico,vida = 2, danio = 7, position = game.at(7,6), image = "pokemons/pikachu_derecha.png")
+
+const chikorita = new Pokemon(elemento = elemPlanta, vida = 40, danio = 16, position = game.at(7,6), image = "pokemons/Chikorita.png")
+
+//agregado
+const charmander = new Pokemon(elemento = elemFuego, vida = 1, danio = 1, position = game.at(3,6), image = "pokemons/charmander.png")
+
+const vaporeon = new Pokemon(elemento = elemAgua, vida = 1, danio = 1, position = game.at(0,6), image = "pokemons/vaporeon.png")
+
+const gengar = new Pokemon(elemento = elemSiniestro, vida = 1, danio = 1, position = game.at(9,1), image = "pokemons/gengar.png")
+
+const charizard = new Pokemon(elemento = elemFuego, vida = 100, danio = 100, position = game.at(3,6), image = "pokemons/charizard.png")
+
+const moltres = new Pokemon(elemento = elemFuego, vida = 50, danio = 40, position = game.at(3,6), image = "pokemons/moltres.png")
+
+const zapdos = new Pokemon(elemento = elemElectrico,vida = 40, danio = 40, position = game.at(7,0), image = "pokemons/zapdos.png")
+
+const flareon = new Pokemon(elemento = elemFuego, vida = 40, danio = 20, position = game.at(3,6), image = "pokemons/flareon.png")
+
+const dragonnair = new Pokemon(elemento = elemAgua, vida = 50, danio = 30, position = game.at(0,6), image = "pokemons/dragonnair.png")
+
+const bulbasaur = new Pokemon(elemento = elemPlanta, vida = 40, danio = 10, position = game.at(7,6), image = "pokemons/bulbasaur.png")

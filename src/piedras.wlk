@@ -1,10 +1,37 @@
 import wollok.game.*
 import elementos.*
+///agregado
+import niveles.*
+import configuraciones.*
+import pokemon.*
+
 
 class Piedra {
     const property elemento = new Elemento()
-    const property position = game.at(0, 0)
-    const property image = ""
+    var property position = game.at(0, 0)
+    var property image = ""
+    
+    //agregado
+    method colisionadoPor(pokemon){
+    	if(pokemon.elemento().equals(self.elemento())){
+    		pokemon.evolucionar(self.elemento())
+    		pokemon.piedrasObtenidas(self)
+    		game.say(pokemon,"Con esta piedra puedo Evolucionar")
+    		game.removeVisual(self)
+    	}else{
+    		game.say(pokemon, "¡Con esta piedra no puedo evolucionar!")
+    		pokemon.piedrasObtenidas(self)
+    		game.removeVisual(self)
+    	}
+    	actual.actualizar() 
+    	//actual.nivel(nivelElectrico)
+    	//actual.elegirNivelAlAzar()
+    	
+    	if(jugador.piedrasObtenidas().size()<5){ 
+    	//game.schedule (5000, {=>game.clear() nivel.configurarTeclas() nivel.cargarNivel(actual.nivel())})
+    	nivel.pasarALaSiguienteBatalla(actual.nivel())
+    	}
+    }
 } 
 
 // tipo de piedra -> elemento que transforma
