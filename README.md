@@ -23,4 +23,12 @@ Una vez recolectadas todas las piedras, el juego termina
 
 ## Respuestas teóricas
 
-(link al archivo o bien responder acá)
+- Polimorfismo: el mensaje polimorfico es perder(), los objetos que lo implementan son el jugador y los rivales
+ y la clase que se aprovecha de ello es Pokemon
+ 
+- Colecciones: se utilizan los metodos all (sin efecto) y forEach (con efecto)
+ 
+- Clases: se utilizan clases, por ejemplo: Pokemon, Elemento
+ 
+- Composición: se utiliza para que un pokemon pueda ganar vida y daño segun el elemento que de la piedra que agarre
+
