@@ -7,38 +7,36 @@ import niveles.*
 
 describe "dos pokemons luchan" {
 	
-	const pokemonElectrico = new Pokemon(elemento = elemElectrico, vida = 100, danio = 80)
-	const pokemonAgua = new Pokemon(elemento = elemAgua, vida = 100, danio = 80)
-	const unPokemonFuego = new Pokemon(elemento = elemFuego, vida = 100, danio = 100)
-	const otroPokemonFuego = new Pokemon(elemento = elemFuego, vida = 90, danio = 90)
+	const pokemonElectrico = new Rival(elemento = elemElectrico, vida = 100, danio = 80)
+	const pokemonAgua = new Rival(elemento = elemAgua, vida = 100, danio = 80)
+	const unPokemonFuego = new Rival(elemento = elemFuego, vida = 100, danio = 100)
+	const otroPokemonFuego = new Rival(elemento = elemFuego, vida = 90, danio = 90)
 
-	test "elementos distintos" {
-		// a misma vida y danio, electrico gana a agua
-		const perdedor = pokemonElectrico.luchar(pokemonAgua)
-		assert.that(perdedor == pokemonAgua)
+	test "un pokemon hace mas daño a uno con elemento debil contra el que a uno con elemento no debil" {
+		// electrico pega mas a agua que a fuego
+		const danioAAgua = pokemonElectrico.danioAElemento(pokemonAgua.elemento())
+		const danioAFuego = pokemonElectrico.danioAElemento(unPokemonFuego.elemento())
+		assert.that(danioAAgua > danioAFuego)
 	}
-	
-	test "elementos iguales" {
-		// a misma vida y danio, electrico gana a agua
-		const perdedor = unPokemonFuego.luchar(otroPokemonFuego)
-		assert.that(perdedor == otroPokemonFuego)
-	}
+
 }
 
 describe "un pokemon evoluciona cuando agarra una piedra" {
 	
-	const pokemonHielo = new Pokemon(elemento = elemHielo, vida = 50, danio = 50)
+	const pokemonHielo = new Rival(elemento = elemHielo, vida = 50, danio = 50)
 	
-	test "evolucionar con elemento hielo" {
+	test "un pokemon al evolucionar con un elemento toma su vida y daño" {
 		pokemonHielo.evolucionar(elemHielo)
 		assert.equals(pokemonHielo.vida(), elemHielo.vida())
 		assert.equals(pokemonHielo.danio(), elemHielo.danio())
 	}
+	
+	// hacer que cuando agarra una piedra evoluciona
 }
 
 describe "configuraciones" {
 	
-	test "cargar nivel bosque" {
+	test "cargar nivel" {
 		nivel.cargarNivel(nivelBosque)
 		assert.that(game.hasVisual(nivelBosque.fondo()))
 		assert.that(game.hasVisual(jugador))
