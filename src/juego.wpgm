@@ -5,8 +5,7 @@ import niveles.*
 program juego {
     game.title("Pokemon")
     game.width(15)
-    game.height(10)
-    nivel.configurarElementos()   
+    game.height(10)  
     nivel.cargarNivel(actual.nivel())
     nivel.configurarTeclas()
     
