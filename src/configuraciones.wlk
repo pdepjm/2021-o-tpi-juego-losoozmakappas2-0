@@ -4,8 +4,6 @@ import niveles.*
 import pokemon.*
 import elementos.*
 import piedras.*
-
-//agregado
 import fondos.*
 
 object nivel {
@@ -17,22 +15,11 @@ object nivel {
     	keyboard.down().onPressDo({jugador.position(abajo.proximaPos(jugador.position()))})
 	}
 	
-	method configurarElementos() {
-		inicializar.electrico()
-		inicializar.agua()
-		inicializar.fuego()
-		inicializar.hielo()
-		inicializar.planta()
-		inicializar.veneno()
-		inicializar.hada()
-		inicializar.siniestro()
-	}
-	
 	method cargarNivel(nivel) {
 		self.configurarLimites()
 		game.addVisual(nivel.fondo())
 		game.addVisual(jugador)
-		nivel.pokemonesRivales().forEach { rival =>  
+		nivel.pokemonesRivales().forEach{ rival =>  
 			game.addVisual(rival)
 			self.ubicarAleatoriamente(rival)
 		}
@@ -44,23 +31,6 @@ object nivel {
 			game.say(jugador, "Vida: " + jugador.vida().toString() + 
 			"\n Daño: " + jugador.danio().toString() +  
 			"\n Elemento: " + jugador.elemento().nombre() + jugador.piedrasObtenidas().size().toString())
-		})
-		
-		keyboard.l().onPressDo({
-			// agregar sonidos, "animaciones" a la pelea
-			if(jugador.estaAlLadoDe(actual.nivel().pokemon())) {
-				const perdedor = jugador.luchar(actual.nivel().pokemon())
-				if(perdedor == jugador) {
-					// agregar dialogo de perdida
-					game.stop()
-				} else {
-					game.removeVisual(perdedor)
-					perdedor.position(game.at(-1,-1)) // lo muevo para poder agarrar la piedra
-					game.addVisual(actual.nivel().piedra())
-				}
-				
-			}
-			
 		})
 	}
 	
@@ -105,7 +75,6 @@ object nivel {
 }
 
 object estadoFinal{
-	
 	method actualizarEstadoDelJugador(){
 		if (jugador.piedrasObtenidas().size() == 5){
 			nivel.ganaste()

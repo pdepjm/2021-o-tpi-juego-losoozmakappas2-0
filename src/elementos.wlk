@@ -7,88 +7,28 @@ class Elemento {
 	
 	method esFuerteContra(elemento) = self.fuerteContra().contains(elemento)
 	method esDebilContra(elemento) = self.debilContra().contains(elemento)
+	
+	method factorElemental(otroElemento) {
+		// completar
+		if(self.esFuerteContra(otroElemento)) {
+			
+		}
+	}
 }
 
-const elemElectrico = new Elemento()
 
-const elemAgua = new Elemento()
+object elemElectrico inherits Elemento(vida = 200, danio = 50, nombre = "electrico", fuerteContra = #{elemAgua}, debilContra = #{elemPlanta, elemFuego}) {}
 
-const elemFuego = new Elemento()
+object elemAgua inherits Elemento(vida = 200, danio = 40, nombre = "agua", fuerteContra = #{elemFuego}, debilContra = #{elemPlanta}) {}
 
-const elemHielo = new Elemento()
+object elemFuego inherits Elemento(vida = 130, danio = 90, nombre = "fuego", fuerteContra = #{elemHielo,elemPlanta,elemElectrico}, debilContra = #{elemAgua}) {}
 
-const elemPlanta = new Elemento()
+object elemHielo inherits Elemento(vida = 180, danio = 30, nombre = "hielo", fuerteContra = #{elemPlanta, elemSiniestro}, debilContra = #{elemAgua, elemFuego}) {}
 
-const elemVeneno = new Elemento()
+object elemPlanta inherits Elemento(vida = 200, danio = 40, nombre = "planta", fuerteContra = #{elemAgua, elemElectrico}, debilContra = #{elemVeneno, elemFuego}) {}
 
-const elemHada = new Elemento()
+object elemVeneno inherits Elemento(vida = 150, danio = 80, nombre = "veneno", fuerteContra = #{elemFuego}, debilContra = #{elemElectrico}) {}
 
-const elemSiniestro = new Elemento()
+object elemHada inherits Elemento(vida = 170, danio = 70, nombre = "hada", fuerteContra = #{elemSiniestro}, debilContra = #{elemVeneno}) {}
 
-// primero instancio los elementos y luego los inicializo, para que no de error 
-
-object inicializar {
-	method electrico() {
-		elemElectrico.vida(200)
-		elemElectrico.danio(50)
-		elemElectrico.nombre("electrico")
-		elemElectrico.fuerteContra(#{elemAgua})
-		elemElectrico.debilContra(#{elemPlanta, elemFuego})
-	}
-	
-	method agua() {
-		elemAgua.vida(200)
-		elemAgua.danio(40)
-		elemAgua.nombre("agua")
-		elemAgua.fuerteContra(#{elemFuego})
-		elemAgua.debilContra(#{elemPlanta})
-	}
-	
-	method fuego() {
-		elemFuego.vida(130)
-		elemFuego.danio(90)
-		elemFuego.nombre("fuego")
-		elemFuego.fuerteContra(#{elemHielo,elemPlanta,elemElectrico})
-		elemFuego.debilContra(#{elemAgua})
-	}
-	
-	method hielo() {
-		elemHielo.vida(180)
-		elemHielo.danio(30)
-		elemHielo.nombre("hielo")
-		elemHielo.fuerteContra(#{elemPlanta, elemSiniestro})
-		elemHielo.debilContra(#{elemAgua, elemFuego})
-	}
-	
-	method planta() {
-		elemPlanta.vida(200)
-		elemPlanta.danio(40)
-		elemPlanta.nombre("planta")
-		elemPlanta.fuerteContra(#{elemAgua,elemElectrico})
-		elemPlanta.debilContra(#{elemVeneno, elemFuego})
-	}
-	
-	method veneno() {
-		elemVeneno.vida(150)
-		elemVeneno.danio(80)
-		elemVeneno.nombre("veneno")
-		elemVeneno.fuerteContra(#{elemFuego})
-		elemVeneno.debilContra(#{elemElectrico})
-	}
-	
-	method hada() {
-		elemHada.vida(170)
-		elemHada.danio(70)
-		elemHada.nombre("hada")
-		elemHada.fuerteContra(#{elemSiniestro})
-		elemHada.debilContra(#{elemVeneno})
-	}
-	
-	method siniestro() {
-		elemSiniestro.vida(190)
-		elemSiniestro.danio(70)
-		elemSiniestro.nombre("siniestro")
-		elemSiniestro.fuerteContra(#{elemPlanta})
-		elemSiniestro.debilContra(#{elemHada, elemHielo})
-	}
-}
+object elemSiniestro inherits Elemento(vida = 190, danio = 70, nombre = "siniestro", fuerteContra = #{elemPlanta}, debilContra = #{elemHada, elemHielo}) {}
