@@ -1,8 +1,6 @@
 import wollok.game.*
 import elementos.*
 import piedras.*
-
-//agregado
 import niveles.*
 import configuraciones.*
 
@@ -60,7 +58,7 @@ class Pokemon {
     		self.recibirDanio(rival.danio())
     	}
     	
-    	//if(self.vida() < rival.vida()) return self else return rival
+    	if(self.vida() < rival.vida()) return self else return rival
     }
     
     method recibirDanio(danioRecibido) {
@@ -118,16 +116,16 @@ class Pokemon {
 
 }
 
-const jugador = new Pokemon(elemento = elemElectrico,vida = 40, danio = 15, position = game.at(7,0), image = "pokemons/pikachu_izquierda.png")
+const jugador = new Pokemon(elemento = elemElectrico,vida = 80, danio = 60, position = game.at(7,0), image = "pokemons/pikachu_izquierda.png")
 
-const otroPikachu = new Pokemon(elemento = elemElectrico,vida = 2, danio = 7, position = game.at(7,6), image = "pokemons/pikachu_derecha.png")
+const otroPikachu = new Pokemon(elemento = elemElectrico,vida = 20, danio = 5, position = game.at(7,6), image = "pokemons/pikachu_derecha.png")
 
-const chikorita = new Pokemon(elemento = elemPlanta, vida = 40, danio = 16, position = game.at(7,6), image = "pokemons/Chikorita.png")
+const chikorita = new Pokemon(elemento = elemPlanta, vida = 30, danio = 16, position = game.at(7,6), image = "pokemons/Chikorita.png")
 
 //agregado
-const charmander = new Pokemon(elemento = elemFuego, vida = 1, danio = 1, position = game.at(3,6), image = "pokemons/charmander.png")
+const charmander = new Pokemon(elemento = elemFuego, vida = 10, danio = 10, position = game.at(3,6), image = "pokemons/charmander.png")
 
-const vaporeon = new Pokemon(elemento = elemAgua, vida = 1, danio = 1, position = game.at(0,6), image = "pokemons/vaporeon.png")
+const vaporeon = new Pokemon(elemento = elemAgua, vida = 15, danio = 10, position = game.at(0,6), image = "pokemons/vaporeon.png")
 
 const gengar = new Pokemon(elemento = elemSiniestro, vida = 1, danio = 1, position = game.at(9,1), image = "pokemons/gengar.png")
 
@@ -139,6 +137,6 @@ const zapdos = new Pokemon(elemento = elemElectrico,vida = 40, danio = 40, posit
 
 const flareon = new Pokemon(elemento = elemFuego, vida = 40, danio = 20, position = game.at(3,6), image = "pokemons/flareon.png")
 
-const dragonnair = new Pokemon(elemento = elemAgua, vida = 50, danio = 30, position = game.at(0,6), image = "pokemons/dragonnair.png")
+const dragonnair = new Pokemon(elemento = elemAgua, vida = 100, danio = 100, position = game.at(0,6), image = "pokemons/dragonnair.png")
 
 const bulbasaur = new Pokemon(elemento = elemPlanta, vida = 40, danio = 10, position = game.at(7,6), image = "pokemons/bulbasaur.png")

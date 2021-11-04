@@ -6,11 +6,7 @@ program juego {
     game.title("Pokemon")
     game.width(15)
     game.height(10)
-    nivel.configurarElementos()
-    
-    const niveles = [nivelBosque,nivelElectrico]
-    
-    
+    nivel.configurarElementos()   
     nivel.cargarNivel(actual.nivel())
     nivel.configurarTeclas()
     

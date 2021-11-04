@@ -33,11 +33,11 @@ object inicializar {
 		elemElectrico.danio(50)
 		elemElectrico.nombre("electrico")
 		elemElectrico.fuerteContra(#{elemAgua})
-		elemElectrico.debilContra(#{elemPlanta,elemFuego})
+		elemElectrico.debilContra(#{elemPlanta, elemFuego})
 	}
 	
 	method agua() {
-		elemAgua.vida(220)
+		elemAgua.vida(200)
 		elemAgua.danio(40)
 		elemAgua.nombre("agua")
 		elemAgua.fuerteContra(#{elemFuego})

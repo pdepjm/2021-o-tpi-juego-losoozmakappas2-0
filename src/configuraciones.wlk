@@ -29,37 +29,17 @@ object nivel {
 	}
 	
 	method cargarNivel(nivel) {
-		//self.configurarFondo(nivel.fondo())
 		self.configurarLimites()
-		//game.boardGround(nivel.fondo().image())
 		game.addVisual(nivel.fondo())
 		game.addVisual(jugador)
-		//self.ubicarAleatoriamente(nivel.pokemon())
-		//game.addVisual(nivel.pokemon())
-			nivel.pokemonesRivales().forEach { rival =>  
+		nivel.pokemonesRivales().forEach { rival =>  
 			game.addVisual(rival)
-			self.ubicarAleatoriamente(rival) 
+			self.ubicarAleatoriamente(rival)
 		}
-		
-    	
-    	/* 
-    	game.onCollideDo(jugador, {
-        	piedra => if(piedra.equals(actual.nivel().piedra())) {
-        		jugador.evolucionar(piedra.elemento())
-        		game.removeVisual(piedra)
-        	}
-        	
-        	//game.clear()
-        	//self.cargarNivel(actual.nivel().siguiente())
-        	//actual.actualizar()
-    	})
-    	
-    	*/
     	game.onCollideDo(jugador, {elementoDelTablero => elementoDelTablero.colisionadoPor(jugador) estadoFinal.actualizarEstadoDelJugador()})
 	}
 	
 	method configurarTeclas() {
-		
 		keyboard.s().onPressDo({
 			game.say(jugador, "Vida: " + jugador.vida().toString() + 
 			"\n Daño: " + jugador.danio().toString() +  
@@ -84,14 +64,12 @@ object nivel {
 		})
 	}
 	
-	//agregado
 	method ubicarAleatoriamente(elementoDelTablero){
-		var posicion = new Position (x=1.randomUpTo(14),y=1.randomUpTo(6))
+		const posicion = new Position (x=1.randomUpTo(14),y=1.randomUpTo(6))
 		if(game.getObjectsIn(posicion).isEmpty())
 			elementoDelTablero.position(posicion)
 		else
 			self.ubicarAleatoriamente(elementoDelTablero)			
-		
 	}
 	
 	method pasarALaSiguienteBatalla(nuevoNivel){
@@ -103,11 +81,10 @@ object nivel {
 		game.title("Pokemon")
 		game.width(15)
 		game.height(10)
-		//game.boardGround(fondoGanador.image())
 		game.addVisual(fondoGanador)
-
-		//keyboard.p().onPressDo{self.inicio()}
-		//keyboard.f().onPressDo{game.stop()}
+		keyboard.r().onPressDo({
+			self.cargarNivel(nivelBosque)
+		})
 	}
 		
 	method perdiste(){
@@ -116,20 +93,23 @@ object nivel {
 		game.width(15)
 		game.height(10)
         game.addVisual(fondoGameOver)
-        actual.nivel(nivelBosque) // volver alnivel inicial
-		keyboard.p().onPressDo{self.configurarTeclas() self.cargarNivel(actual.nivel())}
+        actual.nivel(nivelBosque) // volver al nivel inicial
+		keyboard.p().onPressDo({
+			self.configurarTeclas()
+			self.cargarNivel(actual.nivel())
+			jugador.vida(80)
+		})
 		keyboard.f().onPressDo{game.stop()}
 		
 	}
 }
 
-//agregado
 object estadoFinal{
 	
 	method actualizarEstadoDelJugador(){
-		if (jugador.piedrasObtenidas().size()==5){
+		if (jugador.piedrasObtenidas().size() == 5){
 			nivel.ganaste()
-		} else if(jugador.vida()==0){
+		} else if(jugador.vida() == 0){
 			nivel.perdiste()
 		}
 	}
