@@ -1,11 +1,49 @@
+import wollok.game.*
 import soundProducer.*
+import pokemon.*
+import elementos.*
+import configuraciones.*
+import niveles.*
 
-describe "Inserte descripción" {
-	method initialize() {
-		soundProducer.provider(soundProviderMock)		
+describe "dos pokemons luchan" {
+	
+	const pokemonElectrico = new Pokemon(elemento = elemElectrico, vida = 100, danio = 80)
+	const pokemonAgua = new Pokemon(elemento = elemAgua, vida = 100, danio = 80)
+	const unPokemonFuego = new Pokemon(elemento = elemFuego, vida = 100, danio = 100)
+	const otroPokemonFuego = new Pokemon(elemento = elemFuego, vida = 90, danio = 90)
+
+	test "elementos distintos" {
+		// a misma vida y danio, electrico gana a agua
+		const perdedor = pokemonElectrico.luchar(pokemonAgua)
+		assert.that(perdedor == pokemonAgua)
 	}
 	
-	test "testX" {
-		assert.that(true)
-	}	
+	test "elementos iguales" {
+		// a misma vida y danio, electrico gana a agua
+		const perdedor = unPokemonFuego.luchar(otroPokemonFuego)
+		assert.that(perdedor == otroPokemonFuego)
+	}
+}
+
+describe "un pokemon evoluciona cuando agarra una piedra" {
+	
+	const pokemonHielo = new Pokemon(elemento = elemHielo, vida = 50, danio = 50)
+	
+	test "evolucionar con elemento hielo" {
+		pokemonHielo.evolucionar(elemHielo)
+		assert.equals(pokemonHielo.vida(), elemHielo.vida())
+		assert.equals(pokemonHielo.danio(), elemHielo.danio())
+	}
+}
+
+describe "configuraciones" {
+	
+	test "cargar nivel bosque" {
+		nivel.cargarNivel(nivelBosque)
+		assert.that(game.hasVisual(nivelBosque.fondo()))
+		assert.that(game.hasVisual(jugador))
+		assert.that(nivelBosque.pokemonesRivales().all({
+			pokemon => game.hasVisual(pokemon)
+		}))
+	}
 }
