@@ -10,8 +10,16 @@ class Elemento {
 	
 	method factorElemental(otroElemento) {
 		// completar
-		if(self.esFuerteContra(otroElemento)) {
-			
+		if(self.esFuerteContra(otroElemento) and otroElemento.esDebilContra(self)) {
+			return 2
+		} else if(self.esFuerteContra(otroElemento)) {
+			return 1.5
+		} else if(self.esDebilContra(otroElemento)) {
+			return 0.75
+		} else if(self.esDebilContra(otroElemento) and otroElemento.esFuerteContra(self)) {
+			return 0.5
+		} else {
+			return 1
 		}
 	}
 }
