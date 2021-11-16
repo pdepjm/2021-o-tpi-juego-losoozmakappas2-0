@@ -44,9 +44,7 @@ class Pokemon {
     }
     
     method perder() // implementado segun pokemon
-    method ganar() {
-    	game.say(self, "¡LE GANE!")
-    }
+    method ganar() // implementado segun pokemon
     
     method danioAElemento(otroElemento) {
     	return self.danio() * self.elemento().factorElemental(otroElemento)
@@ -64,17 +62,21 @@ object jugador inherits Pokemon(elemento = elemElectrico,vida = 80, danio = 60, 
 		nivel.perdiste()
 	}
 
+	override method ganar() {
+    	game.say(self, "¡LE GANE!")
+    }
 }
 
 class Rival inherits Pokemon {
 	override method perder() {
 		game.removeVisual(self)
-		self.position(game.at(-1,-1)) // lo muevo para poder agarrar la piedra
-		game.addVisual(actual.nivel().piedra())
-		nivel.ubicarAleatoriamente(actual.nivel().piedra())
-		game.addVisual(actual.nivel().piedra())
-		nivel.pasarALaSiguienteBatalla(actual.nivel())
+		if(not game.hasVisual(actual.nivel().piedra())) {
+			nivel.ubicarAleatoriamente(actual.nivel().piedra())
+			game.addVisual(actual.nivel().piedra())
+		}
 	}
+	
+	override method ganar(){}
 }
 
 const otroPikachu = new Rival(elemento = elemElectrico,vida = 20, danio = 5, position = game.at(7,6), image = "pokemons/pikachu_derecha.png")
