@@ -1,6 +1,5 @@
 import wollok.game.*
 import elementos.*
-///agregado
 import niveles.*
 import configuraciones.*
 import pokemon.*
@@ -11,25 +10,23 @@ class Piedra {
     var property position = game.at(0, 0)
     var property image = ""
     
-    //agregado
-    method colisionadoPor(pokemon){
-    	if(pokemon.elemento().equals(self.elemento())){
+    // delegar en pokemon
+    method colisionadoPor(pokemon) {
+    	if(pokemon.elemento().equals(self.elemento())) {
     		pokemon.evolucionar(self.elemento())
+    		// delegar en nuevo metodo
     		pokemon.piedrasObtenidas(self)
     		game.say(pokemon,"Con esta piedra puedo Evolucionar")
     		game.removeVisual(self)
-    	}else{
+    	} else {
     		game.say(pokemon, "¡Con esta piedra no puedo evolucionar!")
     		pokemon.piedrasObtenidas(self)
     		game.removeVisual(self)
     	}
     	actual.actualizar() 
-    	//actual.nivel(nivelElectrico)
-    	//actual.elegirNivelAlAzar()
     	
     	if(jugador.piedrasObtenidas().size()<5){ 
-    	//game.schedule (5000, {=>game.clear() nivel.configurarTeclas() nivel.cargarNivel(actual.nivel())})
-    	nivel.pasarALaSiguienteBatalla(actual.nivel())
+    		nivel.pasarALaSiguienteBatalla(actual.nivel())
     	}
     }
 } 

@@ -9,6 +9,7 @@ class Fondo {
 	var property position = game.origin()
 }
 
+// todo: cambiar limites y borrar los que no se usan
 // piedra hoja
 const fondoBosque = new Fondo(image = "fondos/Bosque.png", limiteAbajo = 0, limiteArriba = 6, limiteIzq = 0, limiteDerecha = 14)
 // piedra lunar
@@ -28,9 +29,8 @@ const fondoSolar = new Fondo(image = "fondos/sand.png", limiteAbajo = 0, limiteA
 // piedra trueno
 const fondoTrueno = new Fondo(image = "fondos/AmbienteElectrico.png", limiteAbajo = 0, limiteArriba = 6, limiteIzq = 0, limiteDerecha = 14)
 
-
-//agregado
 const fondoGanador = new Fondo(image = "fondos/GanadorPartida.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
+
 const fondoGameOver = new Fondo(image = "fondos/gengarFondo.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
 
 
