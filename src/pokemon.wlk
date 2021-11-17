@@ -4,6 +4,7 @@ import piedras.*
 import niveles.*
 import configuraciones.*
 
+//a verr
 // orden piedras: trueno -> agua -> fuego -> hielo -> hoja -> lunar -> dia -> noche
 // orden elementos: electrico -> agua -> fuego -> hielo -> planta -> veneno -> hada -> siniestro
 
