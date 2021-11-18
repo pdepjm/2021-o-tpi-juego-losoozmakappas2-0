@@ -1,10 +1,13 @@
 import wollok.game.*
-import pepita.*
-import texto.*
+import configuraciones.*
+import niveles.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.addVisual(texto)
-	game.start()
+    game.title("Pokemon")
+    game.width(15)
+    game.height(10)  
+    nivel.cargarNivel(actual.nivel())
+    nivel.configurarTeclas()
+    
+    game.start()
 }
