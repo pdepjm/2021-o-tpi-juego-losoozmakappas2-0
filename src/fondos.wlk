@@ -15,13 +15,13 @@ const fondoBosque = new Fondo(image = "fondos/Bosque.png", limiteAbajo = 0, limi
 // piedra lunar
 const fondoLuna = new Fondo(image = "fondos/moon.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
 // piedra fuego
-const fondoVolcan = new Fondo(image = "fondos/Volcan.png", limiteAbajo = 0, limiteArriba = 6, limiteIzq = 0, limiteDerecha = 14)
+const fondoVolcan = new Fondo(image = "fondos/volcan.png", limiteAbajo = 0, limiteArriba = 6, limiteIzq = 0, limiteDerecha = 13)
 // piedra agua
-const fondoFort = new Fondo(image = "fondos/ambienteAgua.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
+const fondoFort = new Fondo(image = "fondos/ambienteAgua.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 13)
 // piedra dia
-const fondoDia = new Fondo(image = "fondos/keep_outer.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
+const fondoDia = new Fondo(image = "fondos/keep_outer.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 13)
 // piedra hielo
-const fondoHielo = new Fondo(image = "fondos/moon.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
+const fondoHielo = new Fondo(image = "fondos/moon.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 13)
 // piedra noche
 const fondoJungla = new Fondo(image = "fondos/ambientenoche.png", limiteAbajo = 0, limiteArriba = 8, limiteIzq = 0, limiteDerecha = 14)
 // piedra solar

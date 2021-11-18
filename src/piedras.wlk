@@ -10,17 +10,15 @@ class Piedra {
     var property position = game.at(0, 0)
     var property image = ""
     
-    // delegar en pokemon
     method colisionadoPor(pokemon) {
     	if(pokemon.elemento().equals(self.elemento())) {
     		pokemon.evolucionar(self.elemento())
-    		// delegar en nuevo metodo
-    		pokemon.piedrasObtenidas(self)
+    		pokemon.obtenerPiedra(self)
     		game.say(pokemon,"Con esta piedra puedo Evolucionar")
     		game.removeVisual(self)
     	} else {
     		game.say(pokemon, "¡Con esta piedra no puedo evolucionar!")
-    		pokemon.piedrasObtenidas(self)
+    		pokemon.obtenerPiedra(self)
     		game.removeVisual(self)
     	}
     	actual.actualizar() 
@@ -59,5 +57,3 @@ const piedraSolar = new Piedra(elemento = elemElectrico, position = game.at(5,5)
 
 // trueno -> electrico
 const piedraTrueno = new Piedra(elemento = elemElectrico, position = game.at(5,5), image = "piedras/piedra_trueno.png")
-
-

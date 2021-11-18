@@ -4,7 +4,6 @@ import piedras.*
 import niveles.*
 import configuraciones.*
 
-//a verr
 // orden piedras: trueno -> agua -> fuego -> hielo -> hoja -> lunar -> dia -> noche
 // orden elementos: electrico -> agua -> fuego -> hielo -> planta -> veneno -> hada -> siniestro
 
@@ -17,18 +16,13 @@ class Pokemon {
   
     const piedrasObtenidas = #{}
     
-    method piedrasObtenidas(piedra){
+    method obtenerPiedra (piedra) {
     	piedrasObtenidas.add(piedra)
     }
     
     method piedrasObtenidas() = piedrasObtenidas
    
     method elemento() = elemento
-
-    method evolucionar(nuevoElemento) {
-        self.vida(nuevoElemento.vida())
-        self.danio(nuevoElemento.danio())
-    }
      
     method luchar(rival) {
     	rival.recibirDanio(self)    	
@@ -57,7 +51,25 @@ class Pokemon {
 
 }
 
-object jugador inherits Pokemon(elemento = elemElectrico,vida = 80, danio = 60, position = game.at(7,0), image = "pokemons/pikachu_izquierda.png") {
+object jugador inherits Pokemon(elemento = elemElectrico,vida = 80, danio = 60, position = game.at(7,0)) {
+	
+	var property mirandoPara = "_izquierda"
+	var evolucionado = false
+	
+	override method image() {
+		if(not evolucionado) {
+			return "pokemons/pikachu" + mirandoPara + ".png"
+		} else {
+			return "pokemons/raichu" + mirandoPara + ".png"
+		}
+	}
+	
+	method evolucionar(nuevoElemento) {
+        self.vida(nuevoElemento.vida())
+        self.danio(nuevoElemento.danio())
+        evolucionado = true
+    }
+	
 	override method perder() {
 		game.say(self, "¡Rayos perdi la batalla y no obtuve una piedra!")
 		nivel.perdiste()
@@ -80,7 +92,7 @@ class Rival inherits Pokemon {
 	override method ganar(){}
 }
 
-const otroPikachu = new Rival(elemento = elemElectrico,vida = 20, danio = 5, position = game.at(7,6), image = "pokemons/pikachu_derecha.png")
+const eelektrik = new Rival(elemento = elemElectrico,vida = 20, danio = 5, position = game.at(7,6), image = "pokemons/eelektrik.png")
 
 const chikorita = new Rival(elemento = elemPlanta, vida = 30, danio = 16, position = game.at(7,6), image = "pokemons/Chikorita.png")
 

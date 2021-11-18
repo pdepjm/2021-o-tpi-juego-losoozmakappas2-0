@@ -9,8 +9,14 @@ import fondos.*
 object nivel {
 	
 	method configurarLimites() {
-		keyboard.left().onPressDo({jugador.position(izquierda.proximaPos(jugador.position()))})
-    	keyboard.right().onPressDo({jugador.position(derecha.proximaPos(jugador.position()))})
+		keyboard.left().onPressDo({
+			jugador.position(izquierda.proximaPos(jugador.position()))
+			jugador.mirandoPara("_izquierda")
+		})
+    	keyboard.right().onPressDo({
+    		jugador.position(derecha.proximaPos(jugador.position()))
+    		jugador.mirandoPara("_derecha")
+    	})
     	keyboard.up().onPressDo({jugador.position(arriba.proximaPos(jugador.position()))})
     	keyboard.down().onPressDo({jugador.position(abajo.proximaPos(jugador.position()))})
 	}
@@ -27,10 +33,18 @@ object nivel {
 	}
 	
 	method configurarTeclas() {
-		keyboard.s().onPressDo({
+		keyboard.i().onPressDo({
 			game.say(jugador, "Vida: " + jugador.vida().toString() + 
 			"\n Daño: " + jugador.danio().toString() +  
-			"\n Elemento: " + jugador.elemento().nombre() + jugador.piedrasObtenidas().size().toString())
+			"\n Elemento: " + jugador.elemento().nombre())
+		})
+		
+		keyboard.p().onPressDo({
+			game.say(jugador, "Actualmente tengo " + jugador.piedrasObtenidas().size().toString() + " de 5 piedras evolutivas")
+		})
+		
+		keyboard.h().onPressDo({
+			game.say(jugador, "Comandos: \n" + "I: Información \n" + "P: Piedras obtenidas")
 		})
 	}
 	
@@ -48,9 +62,6 @@ object nivel {
 	
 	method ganaste(){
 		game.clear()
-		game.title("Pokemon")
-		game.width(15)
-		game.height(10)
 		game.addVisual(fondoGanador)
 		keyboard.r().onPressDo({
 			self.cargarNivel(nivelBosque)
@@ -59,15 +70,13 @@ object nivel {
 		
 	method perdiste(){
 		game.clear()
-		game.title("Pokemon")
-		game.width(15)
-		game.height(10)
         game.addVisual(fondoGameOver)
         actual.nivel(nivelBosque) // volver al nivel inicial
-		keyboard.p().onPressDo({
+		keyboard.r().onPressDo({
 			self.configurarTeclas()
 			self.cargarNivel(actual.nivel())
 			jugador.vida(80)
+			jugador.piedrasObtenidas().removeAll(jugador.piedrasObtenidas())
 		})
 		keyboard.f().onPressDo{game.stop()}
 		
